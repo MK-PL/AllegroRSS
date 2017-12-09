@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <title>allegroRSS</title>
+    <meta charset="utf-8" /> 
+    <link href="css/style.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+    <header>
+      <h1>allegro</h1>
+      <h1 class="blackFont">RSS</h1>
+    </header>
+    <form action="generateRSS.html" method="get">
+     <label for="url">Wprowadź poniżej adres z parametrami wyszukiwania:</label>
+      <div class="form-float">
+         <div class="form-input">
+           <input id="url" type="text" name="url" placeholder="Wprowadź adres z parametrami wyszukiwania">
+         </div>
+         <div class="form-button">
+           <button type="submit">GENERUJ</button>
+         </div>
+      </div>
+      <div class="form-float form-checkbox">
+         <input id="sponsorowane" type="checkbox" name="sponsorowane" value="true"><label for="sponsorowane">Uwzględnij przedmioty sponsorowane</label>
+      </div>
+    </form>
+    <section class="howItWorks">
+      <h2>Co to jest?</h2>
+      <p><strong>Allegro RSS</strong> jest generatorem kanału RSS, który w porównaniu do standardowego generatora Allegro, pozwala również na spersonalizowanie <strong>wszystkich</strong> parametrów wyszukiwania.</p>
+      <h2>Jak stworzyć kanał RSS?</h2>
+      <ol>
+        <li>Wejdź w wybraną przez Ciebie kategorię na stronie allegro.pl i ustaw parametry wyszukiwania.
+          <img src="img/img1.png">
+        </li>
+        <li>Przekopiuj link z pola adresu WWW przeglądarki, w którym będą umieszczone parametry wyszukiwania.
+          <img src="img/img2.png">
+        </li>
+        <li>Wprowadź adres do wskazanego pola na tej stronie internetowej i naciśnij przycisk "Generuj".
+          <img src="img/img3.png">
+        </li>
+        <li>Zostanie wygenerowany kanał RSS z aukcjami o podanych parametrach wyszukiwaniach, jak w podanym adresie do serwisie Allegro.
+          <img src="img/img4.png">
+        </li>
+      </ol>
+    </section>
+    <footer>Maciej Kawa 2017</footer>
+  </body>
+</html>
