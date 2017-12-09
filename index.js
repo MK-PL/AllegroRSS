@@ -6,6 +6,7 @@ var Nightmare = require('nightmare');
 var vo = require('vo');
 const Feed = require('feed');
 
+const port = process.env.PORT || 4000;
 
 function* run(url, sponsorowane) {
     var nightmare = Nightmare({
@@ -168,6 +169,6 @@ http.createServer(function (req, res) {
          });
          break;
    }
-}).listen(8080,"127.0.0.1",function(){
-   console.log("Listening " + "127.0.0.1" + ":" + 8080); 
+}).listen(port, () => {
+ console.log(`Server running on port ${port}`);
 });
