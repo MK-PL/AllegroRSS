@@ -10,7 +10,7 @@ const port = process.env.PORT || 4000;
 
 function* run(url, sponsorowane) {
     var nightmare = Nightmare({
-    show: true
+    show: false
   }),
         MAX_PAGE = 2,
         currentPage = 0,
