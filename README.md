@@ -1,4 +1,4 @@
-# Allegro RSS 
+# Allegro RSS
 Allegro RSS jest generatorem kanału RSS, który w porównaniu do standardowego generatora Allegro.pl, pozwala również na spersonalizowanie wszystkich parametrów wyszukiwania.
 
 Jak zainstalować?
