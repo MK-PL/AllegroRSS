@@ -9,7 +9,7 @@
   },
   "author": "am / mk lemonit",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "fs": "latest",
     "http": "latest",
     "querystring": "latest",
