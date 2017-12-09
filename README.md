@@ -3,7 +3,7 @@ Allegro RSS jest generatorem kanału RSS, który w porównaniu do standardowego 
 
 Jak zainstalować?
 -
-Skopiuj pliki na serwer obsługujący Node w wersji >= 8 i otwórz w przeglądarce adres http://localhost:8080/index.html
+Skopiuj pliki na serwer obsługujący Node w wersji >= 8 i otwórz w przeglądarce adres http://localhost:4000/index.html
 
 Jak stworzyć kanał RSS?
 -
