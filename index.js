@@ -46,7 +46,7 @@ function* run(url, sponsorowane) {
                       arrayTime                  = arrayItems[i].querySelector('.c589421') != null ? arrayItems[i].querySelector('.c589421').textContent : '',
                       arrayBuyNowAuction = arrayItems[i].querySelector('._1720519') != null ? arrayItems[i].querySelector('._1720519').innerHTML : '',
                       arrayInfo                     = arrayItems[i].querySelector('._7b041d2 ') != null ? arrayItems[i].querySelector('._7b041d2 ').innerHTML : '',
-                      arrayPicture               = typeof arrayItems[i].querySelector('.f5826c2 img').dataset.src != 'undefined' ? arrayItems[i].querySelector('.f5826c2 img').dataset.src : arrayItems[i].querySelector('.f5826c2 img').src;
+                      arrayPicture               = arrayItems[i].querySelector('.f5826c2 img') == null ? '' : typeof arrayItems[i].querySelector('.f5826c2 img').dataset.src != 'undefined' ? arrayItems[i].querySelector('.f5826c2 img').dataset.src : arrayItems[i].querySelector('.f5826c2 img').src;
                        
                 arrayDescription = arrayDescription.replace(/<dt>/g, '<span>');
                 arrayDescription = arrayDescription.replace(/<\/dt>/g, ':</span> ');
@@ -122,9 +122,9 @@ http.createServer(function (req, res) {
                      for(var i = 0; i < result.length; i++){
                         feed.addItem({
                             title: result[i].title,
-                            content: result[i].description + '<div><strong>' + result[i].price + '</strong></div>' + '<div>' + result[i].time + '</div>' + '<div>' + result[i].buyNowAuction + '</div>' + '<dl>' + result[i].info + '</dl><hr>' ,
-                            link: result[i].link,
-                            image: result[i].picture
+                            content: result[i].description + '<div><strong>' + result[i].price + '</strong></div>' + '<div>' + result[i].time + '</div>' + '<div>' + result[i].buyNowAuction + '</div>' + '<dl>' + result[i].info + '</dl><div><img src="'+ result[i].picture +'"></div><hr>' ,
+                            link: result[i].link
+                            //image: result[i].picture
                         });
                      }
                      res.setHeader("Content-Type", "text/xml"); 
