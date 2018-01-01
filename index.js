@@ -54,13 +54,15 @@ function* run(url, sponsorowane) {
                 arrayDescription = arrayDescription.replace(/<\/dd>/g, ',</strong> ');
                 arrayPrice = arrayTime == '' ? arrayPrice : arrayPrice + ' - kwota licytacji';
                 arrayBuyNowAuction = arrayBuyNowAuction.replace('</span><span','</span> <span');
-                if (arrayItems[i].querySelector('._7b041d2').innerHTML.search('z dostawą') != -1){
-                   arrayInfo = arrayItems[i].querySelector('.e4865f5').textContent;
-                } else {
-                   arrayInfo = 'darmowa dostawa';
-                }
-                if (arrayItems[i].querySelector('._7b041d2').innerHTML.search('zwrot') != -1){
-                   arrayInfo += ', darmowy zwrot';
+                if (arrayItems[i].querySelector('._7b041d2') != null){
+                   if (arrayItems[i].querySelector('._7b041d2').innerHTML.search('z dostawą') != -1){
+                      arrayInfo = arrayItems[i].querySelector('.e4865f5').textContent;
+                   } else {
+                      arrayInfo = 'darmowa dostawa';
+                   }
+                   if (arrayItems[i].querySelector('._7b041d2').innerHTML.search('zwrot') != -1){
+                      arrayInfo += ', darmowy zwrot';
+                   }
                 }
                 tempLinks.push({'title': arrayTitle, 'description': arrayDescription, 'link': arrayLinks, 'price': arrayPrice, 'time': arrayTime, 'buyNowAuction': arrayBuyNowAuction, 'info': arrayInfo, 'picture': arrayPicture, 'documentTitle': documentTitle});
              }
