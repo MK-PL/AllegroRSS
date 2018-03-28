@@ -1,6 +1,6 @@
-# Allegro RSS
+# AllegroRSS
 
-Allegro RSS jest generatorem kanału RSS, który w porównaniu do standardowego generatora Allegro.pl, pozwala również na spersonalizowanie wszystkich parametrów wyszukiwania.
+AllegroRSS jest generatorem kanału RSS, który w porównaniu do standardowego generatora Allegro.pl, pozwala również na spersonalizowanie wszystkich parametrów wyszukiwania.
 
 ## Jak zainstalować?
 
@@ -35,7 +35,7 @@ Na wypadek, gdyby w skrypcie wystąpił błąd i chcemy, żeby wykonał się aut
 4. Zostanie wygenerowany kanał RSS z aukcjami o podanych parametrach wyszukiwaniach, jak w podanym adresie do serwisie Allegro.
 ![alt tag](https://raw.githubusercontent.com/MK-PL/AllegroRSS/master/img/img4.png)
 
-## Co zostało użyte do zrobienia Allegro RSS?
+## Co zostało użyte do zrobienia AllegroRSS?
 
 - HTML/CSS/JS/NODE.JS
 - MODUŁY NODE.JS: HTTP, FS, URL, NIGHTMARE, VO, FEED
