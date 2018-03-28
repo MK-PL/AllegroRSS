@@ -4,3 +4,4 @@ yarn-error.log
 scrapper.js
 loop.js
 rss/*
+_temp/*

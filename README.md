@@ -38,7 +38,7 @@ Na wypadek, gdyby w skrypcie wystąpił błąd i chcemy, żeby wykonał się aut
 ## Co zostało użyte do zrobienia Allegro RSS?
 
 - HTML/CSS/JS/NODE.JS
-- MODUŁY NODE.JS: HTTP, FS, URL, QUERYSTRING, NIGHTMARE, VO, FEED
+- MODUŁY NODE.JS: HTTP, FS, URL, NIGHTMARE, VO, FEED
 
 ## Autor
 

@@ -1,26 +1,21 @@
 {
   "name": "AllegroRSS",
-  "version": "1.0.0",
+  "version": "0.12",
   "description": "AllegroRSS",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
-  "author": "am / mk lemonit",
-  "license": "ISC",
+  "author": "MK-PL",
+  "license": "MIT",
   "dependencies": {
     "fs": "latest",
     "http": "latest",
-    "querystring": "latest",
     "url": "latest",
     "nightmare": "latest",
     "vo": "latest",
     "feed": "latest",
     "inspect": "latest"
-  },
-  "engines": {
-    "node": "8.9.0",
-    "npm": "5.5.1"
   }
 }
