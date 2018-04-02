@@ -23,13 +23,10 @@ W przypadku serwerów z Linuxem, w których komunikacja odbywa się domyślnie p
 
 Na serwerze z Ubuntu po połączeniu SSH trzeba wpisać poniższe polecenia:
 
-sudo apt update
-
-sudo apt install ubuntu-gnome-desktop
-
-wget http://download.nomachine.com/download/6.0/Linux/nomachine_6.0.78_1_amd64.deb
-
-sudo dpkg -i nomachine_6.0.78_1_amd64.deb
+1. sudo apt update
+2. sudo apt install ubuntu-gnome-desktop
+3. wget http://download.nomachine.com/download/6.0/Linux/nomachine_6.0.78_1_amd64.deb
+4. sudo dpkg -i nomachine_6.0.78_1_amd64.deb
 
 Po wszystkim trzeba jeszcze zainstalować program NoMachine na swoim komputerze i połączyć się w nim z serwerem wykorzystując dane logowania do SSH (IP, dane użytkownika) i przejść do poniższych instrukcji.
 
