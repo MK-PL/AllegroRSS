@@ -1,6 +1,6 @@
 {
   "name": "AllegroRSS",
-  "version": "0.12",
+  "version": "0.1.3",
   "description": "AllegroRSS",
   "main": "index.js",
   "scripts": {
@@ -12,10 +12,9 @@
   "dependencies": {
     "fs": "latest",
     "http": "latest",
-    "url": "latest",
-    "nightmare": "latest",
-    "vo": "latest",
-    "feed": "latest",
-    "inspect": "latest"
+    "url": "^0.11.0",
+    "nightmare": "^3.0.1",
+    "vo": "^4.0.2",
+    "feed": "^1.1.1"
   }
 }

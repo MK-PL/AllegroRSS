@@ -125,7 +125,6 @@ http.createServer(function (req, res) {
                             title: result[i].title,
                             content: result[i].description + '<div><strong>' + result[i].price + '</strong></div>' + '<div>' + result[i].time + '</div>' + '<div>' + result[i].buyNowAuction + '</div>' + '<dl>' + result[i].info + '</dl><div><img src="'+ result[i].picture +'"></div><hr>' ,
                             link: result[i].link
-                            //image: result[i].picture
                         });
                      }
                      res.setHeader("Content-Type", "text/xml"); 
@@ -133,8 +132,6 @@ http.createServer(function (req, res) {
                      res.end();
                   }
                });
-
-               //res.end();
             }
          });
          break;
