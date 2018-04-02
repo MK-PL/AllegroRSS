@@ -37,7 +37,7 @@ Po wszystkim trzeba jeszcze zainstalować program NoMachine na swoim komputerze 
 
 1. Wejdź na stronę https://nodejs.org/en/download/package-manager/, są tu podane polecenia do odpowiednich dystrybucji, które trzeba wprowadzić w terminalu, żeby zainstalować Node.js.
 2. Po instalacji Node.js otwórz terminal i wejdź do katalogu, gdzie znajdują się pliki od skryptu, a dokładniej plik package.json (polecenia 'cd nazwa_katalogu' i 'cd ..').
-3. Wpisz w oknie terminala 'npm install' i poczekaj, aż ściągną się wymagane moduły Node.js.
+3. Wpisz w oknie terminala 'sudo npm install' i poczekaj, aż ściągną się wymagane moduły Node.js.
 4. Wpisz w oknie terminala 'node index.js' i otwórz w przeglądarce adres http://localhost:4000/index.html.
 5. W okienku wklej adres podstrony z wynikami wyszukiwania do Allegro i naciśnij 'Generuj'.
 6. Zostanie wygenerowany kanał RSS o określonym adresie URL. Jego odświeżenie spowoduje ponowne wykonanie skryptu i zaktualizowanie kanału RSS (skrypt musi być w tym czasie ciągle włączony - patrz punkt 4).
