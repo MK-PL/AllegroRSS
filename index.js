@@ -9,7 +9,8 @@ const port = process.env.PORT || 4000;
 
 function* run(url, sponsorowane) {
     var nightmare = Nightmare({
-    show: false
+    show: false,
+    waitTimeout: 10000
   }),
         MAX_PAGE = 2,
         currentPage = 0,
@@ -86,7 +87,7 @@ function* run(url, sponsorowane) {
 }
 
 
-console.log('Run server');
+console.log('Uruchomiono serwer');
 
 http.createServer(function (req, res) {
    pathName = url.parse(req.url).pathname;
@@ -99,7 +100,7 @@ http.createServer(function (req, res) {
          fs.readFile(__dirname + pathName, function(error, data){
             if (error){
                res.writeHead(404);
-               res.write("Oops, this doesn't exist! - 404");
+               res.write("Ten adres nie istnieje! - 404");
                res.end();
             }
             else {
@@ -110,28 +111,49 @@ http.createServer(function (req, res) {
                } else {
                   sponsorowaneBool = 'false'
                }
-               vo(run(getURL.query.url, sponsorowaneBool))(function(err, result) {
-                  if (err) throw err;
-                  if (result) {
-                     console.log('GENERATE RSS - finish');
-                     var feed = new Feed({
-                         title: result[0].documentTitle,
-                         link: getURL.query.url,
-                         image: 'https://cdn.allegrostatic.com/@metrum/brand/allegro-e2b1a7f8.svg',
-                     });
-                     
-                     for(var i = 0; i < result.length; i++){
-                        feed.addItem({
-                            title: result[i].title,
-                            content: result[i].description + '<div><strong>' + result[i].price + '</strong></div>' + '<div>' + result[i].time + '</div>' + '<div>' + result[i].buyNowAuction + '</div>' + '<dl>' + result[i].info + '</dl><div><img src="'+ result[i].picture +'"></div><hr>' ,
-                            link: result[i].link
-                        });
-                     }
-                     res.setHeader("Content-Type", "text/xml"); 
-                     res.write(feed.rss2());
-                     res.end();
-                  }
-               });
+               
+               timeRun = 1;
+               function makeRSS(){
+                 vo(run(getURL.query.url, sponsorowaneBool))(function(err, result) {
+                    if (err) {
+                      timeRun++;
+                      if(timeRun <= 3){
+                        console.log(err);
+                        console.log('-----------');
+                        console.log(timeRun+'. próba połączenia');
+                        makeRSS();
+                      } else {
+                        console.log(err);
+                        res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});
+                        res.write("Nie można odczytać podanej strony!");
+                        res.end();
+                        //throw err;
+                      }
+                    }
+                    if (result) {
+                       console.log('GENERATE RSS - koniec');
+                       var feed = new Feed({
+                           title: result[0].documentTitle,
+                           link: getURL.query.url
+                       });
+                       
+                       for(var i = 0; i < result.length; i++){
+                          feed.addItem({
+                              title: result[i].title,
+                              description: result[i].description + '<div><strong>' + result[i].price + '</strong></div>' + '<div>' + result[i].time + '</div>' + '<div>' + result[i].buyNowAuction + '</div>' + '<dl>' + result[i].info + '</dl><div><img src="'+ result[i].picture +'"></div><hr>' ,
+                              link: result[i].link
+                          });
+                       }
+                                              
+                       res.setHeader("Content-Type", "text/xml; charset=utf-8"); 
+                       res.write(feed.rss2());
+                       res.end();
+                    }
+                 });
+               }
+               
+               console.log(timeRun+'. próba połączenia');
+               makeRSS();
             }
          });
          break;
@@ -139,14 +161,12 @@ http.createServer(function (req, res) {
          fs.readFile(__dirname + pathName, function(error, data){
             if (error){
                res.writeHead(404);
-               res.write("Oops, this doesn't exist! - 404");
+               res.write("Ten adres nie istnieje! - 404");
                res.end();
             }
             else {
                res.writeHead(200);
                res.write(data);
-               console.log('query' + query);
-               console.log('INDEX HTML');
                res.end();
             }
          });
@@ -154,14 +174,12 @@ http.createServer(function (req, res) {
       default:
          fs.readFile(__dirname + pathName, function(error, data){
             if (error){
-               res.writeHead(404);
-               res.write("Oops, this doesn't exist! - 404");
+               res.writeHead(302, {'Location': 'http://' + req.headers.host + '/index.html'});
                res.end();
             }
             else {
                res.writeHead(200);
                res.write(data);
-               console.log('query' + query);
                res.end();
             }
          });

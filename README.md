@@ -39,7 +39,9 @@ Po wszystkim trzeba jeszcze zainstalować program NoMachine na swoim komputerze 
 5. W okienku wklej adres podstrony z wynikami wyszukiwania do Allegro i naciśnij 'Generuj'.
 6. Zostanie wygenerowany kanał RSS o określonym adresie URL. Jego odświeżenie spowoduje ponowne wykonanie skryptu i zaktualizowanie kanału RSS (skrypt musi być w tym czasie ciągle włączony - patrz punkt 4).
 
-Na wypadek, gdyby w skrypcie wystąpił błąd i chcemy, żeby wykonał się automatyczny restart, to można w tym celu wykorzystać menedżer procesów Node.js: http://pm2.keymetrics.io/
+Na wypadek, gdyby w skrypcie wystąpił błąd i chcemy, żeby wykonał się automatyczny restart skryptu, to można w tym celu wykorzystać menedżer procesów Node.js: http://pm2.keymetrics.io/
+
+Żeby utworzony kanał był dostępny w Internecie, należy w systemie operacyjnym postawić serwer WWW (IIS, Apache, Nginx, Lighttpd) i przekierować http://localhost:4000/ na adres IP komputera, na którym jest wykonywany skrypt. W przypadku Ubuntu można skorzystać z tego poradnika: https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-16-04 
 
 ## Jak stworzyć kanał RSS?
 
@@ -56,6 +58,12 @@ Na wypadek, gdyby w skrypcie wystąpił błąd i chcemy, żeby wykonał się aut
 
 - HTML/CSS/JS/NODE.JS
 - MODUŁY NODE.JS: HTTP, FS, URL, NIGHTMARE, VO, FEED
+
+## Zmiany
+
+- 0.1.4 Przerobienie skryptu, żeby się nie wyłączał w momencie wystąpienia błędu, drobne poprawki w kodzie, modyfikacja opisu.
+- 0.1.3 Poprawki w kodzie.
+- 0.1.0 Start skryptu.
 
 ## Autor
 

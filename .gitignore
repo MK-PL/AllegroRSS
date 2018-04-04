@@ -5,3 +5,6 @@ scrapper.js
 loop.js
 rss/*
 _temp/*
+.profile
+Aptfile
+Procfile

@@ -58,6 +58,8 @@ form {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  position: relative;
+  top: -1px;
 }
  
 label {
@@ -69,7 +71,7 @@ input[type="text"] {
   width:100%;
   height:54px;
   line-height: 1.42857143;
-  padding-left: 35px;
+  padding-left: 18px;
   color:#333;
   text-transform: uppercase;
   font-size: 0.8125em;
@@ -82,27 +84,33 @@ input[type="text"] {
   transition: .3s all ease;
 }
 
+input[type="checkbox"] {
+  cursor: pointer;
+}
+
 button {
-    background:#333;
-    color:#fff;
-    line-height: 1.33;
-    font-size: 1.0625em;
-    display: inline-block;
-    padding:15px 20px;
-    margin-bottom: 0;
-    font-weight: 500;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    border:1px solid #333;
-    letter-spacing: 0.075em;
-    width:100%;
-    height:54px;
-    cursor:pointer;
+  background:#333;
+  color:#fff;
+  line-height: 1.33;
+  font-size: 1.0625em;
+  display: inline-block;
+  padding:15px 20px;
+  margin-bottom: 0;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  border:1px solid #333;
+  letter-spacing: 0.075em;
+  width:100%;
+  height:54px;
+  cursor:pointer;
+  transition:all 0.4s ease-out
 }
 
 button:hover {
-  background:#222;
+  background:#ff5a00;
+  border-color: #ff5a00;
   transition:all 0.4s ease-out
 }
 
