@@ -46,14 +46,23 @@ Na wypadek, gdyby w skrypcie wystąpił błąd i chcemy, żeby wykonał się aut
 ## Jak stworzyć kanał RSS?
 
 1. Wejdź w wybraną przez Ciebie kategorię na stronie allegro.pl i ustaw parametry wyszukiwania. 
+
 ![alt tag](https://raw.githubusercontent.com/MK-PL/AllegroRSS/master/img/img1.png)
+
 2. Ustaw sortowanie aukcji po najnowszych, żeby śledzić najnowsze aukcje w kanale RSS. W kanale RSS domyślnie wyświetlane są aukcje z trzech pierwszych podstron z wynikami. 
+
 ![alt tag](https://raw.githubusercontent.com/MK-PL/AllegroRSS/master/img/img2.png)
+
 3. Przekopiuj link URL z pola adresu WWW przeglądarki. Powinny być w nim zamieszczone parametry wyszukiwania.
+
 ![alt tag](https://raw.githubusercontent.com/MK-PL/AllegroRSS/master/img/img3.png)
+
 4. Wprowadź adres do wskazanego pola na stronie internetowej skryptu (domyślnie http://localhost:4000/index.html) i naciśnij przycisk "Generuj".
+
 ![alt tag](https://raw.githubusercontent.com/MK-PL/AllegroRSS/master/img/img4.png)
+
 5. Zostanie wygenerowany kanał RSS z aukcjami o podanych parametrach wyszukiwaniach, jak w podanym adresie URL do serwisu Allegro.
+
 ![alt tag](https://raw.githubusercontent.com/MK-PL/AllegroRSS/master/img/img5.png)
 
 ## Co zostało użyte do zrobienia AllegroRSS?
