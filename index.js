@@ -106,7 +106,8 @@ http.createServer(function (req, res) {
                     res.write("Ten adres nie istnieje! - 404");
                     res.end();
                 } else {
-                    console.log('GENEROWANIE RSS - start');
+                    console.log('-----------');
+                    console.log('GENEROWANIE RSS - start dla adresu URL: ' + getURL.query.url);
                     var sponsorowaneBool;
                     if (typeof getURL.query.sponsorowane != "undefined"){
                         sponsorowaneBool = 'true'
@@ -123,13 +124,13 @@ http.createServer(function (req, res) {
                                     console.log('Wystąpił błąd o treści:');
                                     console.log(err);
                                     console.log('-----------');
-                                    console.log(timeRun+'. Próba połączenia');
+                                    console.log(timeRun + '. Próba połączenia');
                                     makeRSS();
                                 } else {
                                     console.log('Wystąpił błąd o treści:');
                                     console.log(err);
                                     console.log('-----------');
-                                    console.log('Nie można odczytać podanej strony - przerwano generowanie RSS!');
+                                    console.log('Przerwano generowanie RSS, ponieważ nie można odczytać podanego adresu URL: ' + getURL.query.url);
                                     res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});
                                     res.write("Nie można odczytać podanej strony!");
                                     res.end();
@@ -137,8 +138,9 @@ http.createServer(function (req, res) {
                                 }
                             }
                             if (result) {
+                                console.log('-----------');
                                 console.log('Uzyskano połączenie z podaną stroną i pobrano z niej dane');
-                                console.log('GENEROWANIE RSS - koniec');
+                                console.log('GENEROWANIE RSS - koniec dla adresu URL: ' + getURL.query.url);
                                 var feed = new Feed({
                                     title: result[0].documentTitle,
                                     link: getURL.query.url
