@@ -78,6 +78,10 @@ Na wypadek, gdyby w skrypcie wystąpił błąd i chcemy, żeby wykonał się aut
 - 0.1.3 Poprawki w kodzie.
 - 0.1.0 Start skryptu.
 
+## Błędy
+
+Wykryte błędy proszę zgłaszać w sekcji 'Issues' projektu - dzięki temu inni użytkownicy będą mogli zapoznać się z problemem (zwłaszcza, jeśli mają podobny) i ewentualnie zaproponować swoje rozwiązania.
+
 ## Autor
 
 Maciej Kawa
