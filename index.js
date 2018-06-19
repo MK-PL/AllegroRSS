@@ -7,7 +7,7 @@ const Feed = require('feed');
 
 const port = process.env.PORT || 4000;
 
-function* run(url, sponsorowane) {
+function* runElectron(url, sponsorowane) {
     var nightmare = Nightmare({
               show: false,
               waitTimeout: 10 * 1000
@@ -21,19 +21,26 @@ function* run(url, sponsorowane) {
     yield nightmare
         .goto(url)
         .scrollTo(10000,0)
-        .wait('.c33f1ee')
-        .catch(function(error){
+        .wait('.main-content')
+        .exists('.d7cfc2c')
+        .then(function(result) {
+            if(result) {
+              nightmare.end('brak aukcji');
+              throw 'brak aukcji';
+            }
+        })
+        .catch(function(error) {
             nightmare.end(error);
             throw error;
         })
         
     var documentTitle;
-
+    
     do {
         links = links.concat(yield nightmare
             .evaluate(function(sponsorowane) {
                 var arrayItems;
-                if(sponsorowane == 'true'){
+                if(sponsorowane == 'true') {
                     arrayItems = Array.from(document.querySelectorAll(".fa72b28"));
                 } else {
                     arrayItems = Array.from(document.querySelectorAll("._61aa5c3:not(._61c59e4) .fa72b28"));
@@ -42,7 +49,7 @@ function* run(url, sponsorowane) {
                 var tempLinks = [],
                       documentTitle = document.title;
                      
-                for(var i = 0; i < arrayItems.length; i++){
+                for(var i = 0; i < arrayItems.length; i++) {
                    var arrayTitle                    = arrayItems[i].querySelector('._342830a') != null ? arrayItems[i].querySelector('._342830a').textContent : '',
                          arrayDescription        = arrayItems[i].querySelector('.bec3e46') != null ? arrayItems[i].querySelector('.bec3e46').innerHTML : '',
                          arrayLinks                  = arrayItems[i].querySelector('._342830a a') != null ? arrayItems[i].querySelector('._342830a a').href : '',
@@ -59,13 +66,13 @@ function* run(url, sponsorowane) {
                    arrayPrice = arrayTime == '' ? arrayPrice : arrayPrice + ' - kwota licytacji';
                    arrayBuyNowAuction = arrayBuyNowAuction.replace('</span><span','</span> <span');
                    
-                   if (arrayItems[i].querySelector('._7b041d2') != null){
-                      if (arrayItems[i].querySelector('._7b041d2').innerHTML.search('z dostawą') != -1){
+                   if (arrayItems[i].querySelector('._7b041d2') != null) {
+                      if (arrayItems[i].querySelector('._7b041d2').innerHTML.search('z dostawą') != -1) {
                           arrayInfo = arrayItems[i].querySelector('.e4865f5').textContent;
                       } else {
                           arrayInfo = 'darmowa dostawa';
                       }
-                      if (arrayItems[i].querySelector('._7b041d2').innerHTML.search('zwrot') != -1){
+                      if (arrayItems[i].querySelector('._7b041d2').innerHTML.search('zwrot') != -1) {
                           arrayInfo += ', darmowy zwrot';
                       }
                    }
@@ -93,15 +100,15 @@ function* run(url, sponsorowane) {
 }
 
 http.createServer(function (req, res) {
-    pathName = url.parse(req.url).pathname;
-    query = url.parse(req.url).query;
+    var pathName = url.parse(req.url).pathname,
+          query = url.parse(req.url).query;
     if(req.method=='GET') {
         var getURL = url.parse(req.url,true);
     }
-    switch(pathName){
+    switch(pathName) {
         case '/generateRSS.html':
-            fs.readFile(__dirname + pathName, function(error, data){
-                if (error){
+            fs.readFile(__dirname + pathName, function(error, data) {
+                if (error) {
                     res.writeHead(404);
                     res.write("Ten adres nie istnieje! - 404");
                     res.end();
@@ -109,32 +116,39 @@ http.createServer(function (req, res) {
                     console.log('-----------');
                     console.log('GENEROWANIE RSS - start dla adresu URL: ' + getURL.query.url);
                     var sponsorowaneBool;
-                    if (typeof getURL.query.sponsorowane != "undefined"){
+                    if (typeof getURL.query.sponsorowane != "undefined") {
                         sponsorowaneBool = 'true'
                     } else {
                         sponsorowaneBool = 'false'
                     }
                    
                     timeRun = 1;
-                    function makeRSS(){
-                        vo(run(getURL.query.url, sponsorowaneBool))(function(err, result) {
+                    function makeRSS() {
+                        vo(runElectron(getURL.query.url, sponsorowaneBool))(function(err, result) {
                             if (err) {
-                                timeRun++;
-                                if(timeRun <= 3){
-                                    console.log('Wystąpił błąd o treści:');
-                                    console.log(err);
+                                if(err == 'brak aukcji') {
                                     console.log('-----------');
-                                    console.log(timeRun + '. Próba połączenia');
-                                    makeRSS();
-                                } else {
-                                    console.log('Wystąpił błąd o treści:');
-                                    console.log(err);
-                                    console.log('-----------');
-                                    console.log('Przerwano generowanie RSS, ponieważ nie można odczytać podanego adresu URL: ' + getURL.query.url);
+                                    console.log('Przerwano generowanie RSS, ponieważ nie ma aktywnych aukcji w podanym adresie URL: ' + getURL.query.url);
                                     res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});
-                                    res.write("Nie można odczytać podanej strony!");
+                                    res.write("W podanym adresie URL nie ma obecnie aktywnych aukcji.");
                                     res.end();
-                                    //throw err;
+                                } else {
+                                    timeRun++;
+                                    if(timeRun <= 3) {
+                                        console.log('Wystąpił błąd o treści:');
+                                        console.log(err);
+                                        console.log('-----------');
+                                        console.log(timeRun + '. Próba połączenia');
+                                        makeRSS();
+                                    } else {
+                                        console.log('Wystąpił błąd o treści:');
+                                        console.log(err);
+                                        console.log('-----------');
+                                        console.log('Przerwano generowanie RSS, ponieważ nie można odczytać podanego adresu URL: ' + getURL.query.url);
+                                        res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});
+                                        res.write("Nie można odczytać podanej strony!");
+                                        res.end();
+                                    }
                                 }
                             }
                             if (result) {
@@ -146,7 +160,7 @@ http.createServer(function (req, res) {
                                     link: getURL.query.url
                                 });
                                
-                                for(var i = 0; i < result.length; i++){
+                                for(var i = 0; i < result.length; i++) {
                                     feed.addItem({
                                         title: result[i].title,
                                         description: result[i].description + '<div><strong>' + result[i].price + '</strong></div>' + '<div>' + result[i].time + '</div>' + '<div>' + result[i].buyNowAuction + '</div>' + '<dl>' + result[i].info + '</dl><div><img src="'+ result[i].picture +'"></div><hr>' ,
@@ -167,8 +181,8 @@ http.createServer(function (req, res) {
             });
             break;
         case '/index.html':
-            fs.readFile(__dirname + pathName, function(error, data){
-                if (error){
+            fs.readFile(__dirname + pathName, function(error, data) {
+                if (error) {
                     res.writeHead(404);
                     res.write("Ten adres nie istnieje! - 404");
                     res.end();
@@ -181,8 +195,8 @@ http.createServer(function (req, res) {
             });
             break;
         default:
-            fs.readFile(__dirname + pathName, function(error, data){
-                if (error){
+            fs.readFile(__dirname + pathName, function(error, data) {
+                if (error) {
                     res.writeHead(302, {'Location': 'http://' + req.headers.host + '/index.html'});
                     res.end();
                 }

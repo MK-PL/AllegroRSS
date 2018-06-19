@@ -72,6 +72,7 @@ Na wypadek, gdyby w skrypcie wystąpił błąd i chcemy, żeby wykonał się aut
 
 ## Zmiany
 
+- 0.1.7 Przerobienie skryptu, żeby zwracał komunikat, gdy nie ma aktywnych aukcji w podanym adresie URL.
 - 0.1.6 Modyfikacja kodu - wyświetlanie użytego adresu URL w komunikatach o generowaniu kanału RSS.
 - 0.1.5 Modyfikacja kodu - moduł Electron teraz się wyłącza w przypadku wystąpienia błędu i nie zajmuje niepotrzebnie pamięci RAM, drobne poprawki w kodzie, modyfikacja opisu skryptu.
 - 0.1.4 Przerobienie skryptu, żeby się nie wyłączał w momencie wystąpienia błędu, drobne poprawki w kodzie, modyfikacja opisu skryptu.
