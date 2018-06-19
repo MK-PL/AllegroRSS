@@ -7,7 +7,7 @@ const Feed = require('feed');
 
 const port = process.env.PORT || 4000;
 
-function* runElectron(url, sponsorowane) {
+function* runElectron(url, checkSponspored) {
     var nightmare = Nightmare({
               show: false,
               waitTimeout: 10 * 1000
@@ -38,9 +38,9 @@ function* runElectron(url, sponsorowane) {
     
     do {
         links = links.concat(yield nightmare
-            .evaluate(function(sponsorowane) {
+            .evaluate(function(checkSponspored) {
                 var arrayItems;
-                if(sponsorowane == 'true') {
+                if(checkSponspored == 'true') {
                     arrayItems = Array.from(document.querySelectorAll(".fa72b28"));
                 } else {
                     arrayItems = Array.from(document.querySelectorAll("._61aa5c3:not(._61c59e4) .fa72b28"));
@@ -81,7 +81,7 @@ function* runElectron(url, sponsorowane) {
                 }
                 
                 return tempLinks;
-            }, sponsorowane)
+            }, checkSponspored)
         );
       
       nextExists = yield nightmare.visible('.opbox-pagination.bottom .next a');
@@ -115,16 +115,16 @@ http.createServer(function (req, res) {
                 } else {
                     console.log('-----------');
                     console.log('GENEROWANIE RSS - start dla adresu URL: ' + getURL.query.url);
-                    var sponsorowaneBool;
+                    var isSponspored;
                     if (typeof getURL.query.sponsorowane != "undefined") {
-                        sponsorowaneBool = 'true'
+                        isSponspored = 'true'
                     } else {
-                        sponsorowaneBool = 'false'
+                        isSponspored = 'false'
                     }
                    
                     timeRun = 1;
                     function makeRSS() {
-                        vo(runElectron(getURL.query.url, sponsorowaneBool))(function(err, result) {
+                        vo(runElectron(getURL.query.url, isSponspored))(function(err, result) {
                             if (err) {
                                 if(err == 'brak aukcji') {
                                     console.log('-----------');
