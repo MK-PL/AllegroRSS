@@ -7,6 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MK-PL/AllegroRSS.git"
+  },
   "author": "MK-PL",
   "license": "MIT",
   "dependencies": {
