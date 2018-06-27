@@ -9,38 +9,37 @@ const port = process.env.PORT || 4000;
 
 function* runElectron(url, checkSponspored) {
     var nightmare = Nightmare({
-              show: false,
-              waitTimeout: 10 * 1000
-          });
+            show: false,
+            waitTimeout: 10 * 1000
+        });
       
     var MAX_PAGE = 2,
-          currentPage = 0,
-          nextExists = true,
-          links = [];
+        currentPage = 0,
+        nextExists = true,
+        links = [];
 
+    var pageTitle = yield nightmare.goto(url).title();
+  
     yield nightmare
-        .goto(url)
         .scrollTo(10000,0)
         .wait('.main-content')
         .exists('.d7cfc2c')
         .then(function(result) {
             if(result) {
-              nightmare.end('brak aukcji');
-              throw 'brak aukcji';
+                nightmare.end('brak aukcji');
+                throw ['brak aukcji', pageTitle];
             }
         })
         .catch(function(error) {
             nightmare.end(error);
             throw error;
-        })
-        
-    var documentTitle;
+        });
     
     do {
         links = links.concat(yield nightmare
             .evaluate(function(checkSponspored) {
                 var arrayItems;
-                if(checkSponspored == 'true') {
+                if(checkSponspored) {
                     arrayItems = Array.from(document.querySelectorAll(".fa72b28"));
                 } else {
                     arrayItems = Array.from(document.querySelectorAll("._61aa5c3:not(._61c59e4) .fa72b28"));
@@ -50,23 +49,23 @@ function* runElectron(url, checkSponspored) {
                       documentTitle = document.title;
                      
                 for(var i = 0; i < arrayItems.length; i++) {
-                   var arrayTitle                    = arrayItems[i].querySelector('._342830a') != null ? arrayItems[i].querySelector('._342830a').textContent : '',
-                         arrayDescription        = arrayItems[i].querySelector('.bec3e46') != null ? arrayItems[i].querySelector('.bec3e46').innerHTML : '',
-                         arrayLinks                  = arrayItems[i].querySelector('._342830a a') != null ? arrayItems[i].querySelector('._342830a a').href : '',
-                         arrayPrice                  = arrayItems[i].querySelector('.e82f23a') != null ? arrayItems[i].querySelector('.e82f23a').textContent : '',
-                         arrayTime                  = arrayItems[i].querySelector('.c589421') != null ? arrayItems[i].querySelector('.c589421').textContent : '',
-                         arrayBuyNowAuction = arrayItems[i].querySelector('._1720519') != null ? arrayItems[i].querySelector('._1720519').innerHTML : '',
-                         arrayInfo                     = arrayItems[i].querySelector('._7b041d2 ') != null ? arrayItems[i].querySelector('._7b041d2 ').innerHTML : '',
-                         arrayPicture               = arrayItems[i].querySelector('.f5826c2 img') == null ? '' : typeof arrayItems[i].querySelector('.f5826c2 img').dataset.src != 'undefined' ? arrayItems[i].querySelector('.f5826c2 img').dataset.src : arrayItems[i].querySelector('.f5826c2 img').src;
+                   var arrayTitle                    = arrayItems[i].querySelector('._342830a') !== null ? arrayItems[i].querySelector('._342830a').textContent : '',
+                         arrayDescription        = arrayItems[i].querySelector('.bec3e46') !== null ? arrayItems[i].querySelector('.bec3e46').innerHTML : '',
+                         arrayLinks                  = arrayItems[i].querySelector('._342830a a') !== null ? arrayItems[i].querySelector('._342830a a').href : '',
+                         arrayPrice                  = arrayItems[i].querySelector('.e82f23a') !== null ? arrayItems[i].querySelector('.e82f23a').textContent : '',
+                         arrayTime                  = arrayItems[i].querySelector('.c589421') !== null ? arrayItems[i].querySelector('.c589421').textContent : '',
+                         arrayBuyNowAuction = arrayItems[i].querySelector('._1720519') !== null ? arrayItems[i].querySelector('._1720519').innerHTML : '',
+                         arrayInfo                     = arrayItems[i].querySelector('._7b041d2 ') !== null ? arrayItems[i].querySelector('._7b041d2 ').innerHTML : '',
+                         arrayPicture               = arrayItems[i].querySelector('.f5826c2 img') === null ? '' : typeof arrayItems[i].querySelector('.f5826c2 img').dataset.src != 'undefined' ? arrayItems[i].querySelector('.f5826c2 img').dataset.src : arrayItems[i].querySelector('.f5826c2 img').src;
                          
                    arrayDescription = arrayDescription.replace(/<dt>/g, '<span>');
                    arrayDescription = arrayDescription.replace(/<\/dt>/g, ':</span> ');
                    arrayDescription = arrayDescription.replace(/<dd>/g, '<strong>');
                    arrayDescription = arrayDescription.replace(/<\/dd>/g, ',</strong> ');
-                   arrayPrice = arrayTime == '' ? arrayPrice : arrayPrice + ' - kwota licytacji';
+                   arrayPrice = arrayTime === '' ? arrayPrice : arrayPrice + ' - kwota licytacji';
                    arrayBuyNowAuction = arrayBuyNowAuction.replace('</span><span','</span> <span');
                    
-                   if (arrayItems[i].querySelector('._7b041d2') != null) {
+                   if (arrayItems[i].querySelector('._7b041d2') !== null) {
                       if (arrayItems[i].querySelector('._7b041d2').innerHTML.search('z dostawą') != -1) {
                           arrayInfo = arrayItems[i].querySelector('.e4865f5').textContent;
                       } else {
@@ -88,7 +87,7 @@ function* runElectron(url, checkSponspored) {
       if (nextExists) {
           yield nightmare
               .click('.opbox-pagination.bottom .next a')
-              .wait('.c33f1ee')
+              .wait('.c33f1ee');
       }
       
       currentPage++;
@@ -100,14 +99,70 @@ function* runElectron(url, checkSponspored) {
 }
 
 http.createServer(function (req, res) {
-    var pathName = url.parse(req.url).pathname,
-          query = url.parse(req.url).query;
-    if(req.method=='GET') {
+    var pathName = url.parse(req.url).pathname;
+    if(req.method == 'GET') {
         var getURL = url.parse(req.url,true);
     }
     switch(pathName) {
         case '/generateRSS.html':
-            fs.readFile(__dirname + pathName, function(error, data) {
+            fs.readFile(__dirname + pathName, function(error) {
+                function makeRSS() {
+                    vo(runElectron(getURL.query.url, isSponspored))(function(err, result) {
+                        if (err) {
+                            if(err[0] == 'brak aukcji') {
+                                console.log('-----------');
+                                console.log('Wygenerowano pusty kanał RSS, ponieważ nie ma aktywnych aukcji w podanym adresie URL: ' + getURL.query.url);
+                                let feed = new Feed({
+                                    title: err[1],
+                                    link: getURL.query.url
+                                });                                
+                                res.setHeader("Content-Type", "text/xml; charset=utf-8"); 
+                                res.write(feed.rss2());
+                                res.end();
+                            } else {
+                                timeRun++;
+                                if(timeRun <= 3) {
+                                    console.log('Wystąpił błąd o treści:');
+                                    console.log(err);
+                                    console.log('-----------');
+                                    console.log(timeRun + '. Próba połączenia');
+                                    makeRSS();
+                                } else {
+                                    console.log('Wystąpił błąd o treści:');
+                                    console.log(err);
+                                    console.log('-----------');
+                                    console.log('Przerwano generowanie RSS, ponieważ nie można odczytać podanego adresu URL: ' + getURL.query.url);
+                                    res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});
+                                    res.write("Nie można odczytać podanej strony!");
+                                    res.end();
+                                }
+                            }
+                        }
+                        if (result) {
+                            console.log('-----------');
+                            console.log('Uzyskano połączenie z podaną stroną i pobrano z niej dane');
+                            console.log('GENEROWANIE RSS - koniec dla adresu URL: ' + getURL.query.url);
+                            var feed = new Feed({
+                                title: result[0].documentTitle,
+                                link: getURL.query.url
+                            });
+
+                            for(var i = 0; i < result.length; i++) {
+                                feed.addItem({
+                                    title: result[i].title,
+                                    description: result[i].description + '<div><strong>' + result[i].price + '</strong></div>' + '<div>' + result[i].time + '</div>' + '<div>' + result[i].buyNowAuction + '</div>' + '<dl>' + result[i].info + '</dl><div><img src="'+ result[i].picture +'"></div><hr>' ,
+                                    link: result[i].link
+                                });
+                            }
+
+                            res.setHeader("Content-Type", "text/xml; charset=utf-8"); 
+                            res.write(feed.rss2());
+                            res.end();
+                        }
+                    });   
+                }
+              
+              
                 if (error) {
                     res.writeHead(404);
                     res.write("Ten adres nie istnieje! - 404");
@@ -117,64 +172,12 @@ http.createServer(function (req, res) {
                     console.log('GENEROWANIE RSS - start dla adresu URL: ' + getURL.query.url);
                     var isSponspored;
                     if (typeof getURL.query.sponsorowane != "undefined") {
-                        isSponspored = 'true'
+                        isSponspored = true;
                     } else {
-                        isSponspored = 'false'
+                        isSponspored = false;
                     }
                    
-                    timeRun = 1;
-                    function makeRSS() {
-                        vo(runElectron(getURL.query.url, isSponspored))(function(err, result) {
-                            if (err) {
-                                if(err == 'brak aukcji') {
-                                    console.log('-----------');
-                                    console.log('Przerwano generowanie RSS, ponieważ nie ma aktywnych aukcji w podanym adresie URL: ' + getURL.query.url);
-                                    res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});
-                                    res.write("W podanym adresie URL nie ma obecnie aktywnych aukcji.");
-                                    res.end();
-                                } else {
-                                    timeRun++;
-                                    if(timeRun <= 3) {
-                                        console.log('Wystąpił błąd o treści:');
-                                        console.log(err);
-                                        console.log('-----------');
-                                        console.log(timeRun + '. Próba połączenia');
-                                        makeRSS();
-                                    } else {
-                                        console.log('Wystąpił błąd o treści:');
-                                        console.log(err);
-                                        console.log('-----------');
-                                        console.log('Przerwano generowanie RSS, ponieważ nie można odczytać podanego adresu URL: ' + getURL.query.url);
-                                        res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});
-                                        res.write("Nie można odczytać podanej strony!");
-                                        res.end();
-                                    }
-                                }
-                            }
-                            if (result) {
-                                console.log('-----------');
-                                console.log('Uzyskano połączenie z podaną stroną i pobrano z niej dane');
-                                console.log('GENEROWANIE RSS - koniec dla adresu URL: ' + getURL.query.url);
-                                var feed = new Feed({
-                                    title: result[0].documentTitle,
-                                    link: getURL.query.url
-                                });
-                               
-                                for(var i = 0; i < result.length; i++) {
-                                    feed.addItem({
-                                        title: result[i].title,
-                                        description: result[i].description + '<div><strong>' + result[i].price + '</strong></div>' + '<div>' + result[i].time + '</div>' + '<div>' + result[i].buyNowAuction + '</div>' + '<dl>' + result[i].info + '</dl><div><img src="'+ result[i].picture +'"></div><hr>' ,
-                                        link: result[i].link
-                                    });
-                                }
-                                                      
-                                res.setHeader("Content-Type", "text/xml; charset=utf-8"); 
-                                res.write(feed.rss2());
-                                res.end();
-                            }
-                        });   
-                    }
-                   
+                    var timeRun = 1;                   
                     console.log(timeRun+'. Próba połączenia');
                     makeRSS();
                 }
