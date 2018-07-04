@@ -72,6 +72,7 @@ Na wypadek, gdyby w skrypcie wystąpił błąd i chcemy, żeby wykonał się aut
 
 ## Zmiany
 
+- 0.1.9 Naprawienie usterki, która uniemożliwiała działanie skryptu.
 - 0.1.8 Przerobienie skryptu, żeby zwracał pusty kanał RSS, gdy nie ma aktywnych aukcji w podanym adresie URL, poprawki w kodzie.
 - 0.1.7 Przerobienie skryptu, żeby zwracał komunikat, gdy nie ma aktywnych aukcji w podanym adresie URL.
 - 0.1.6 Modyfikacja kodu - wyświetlanie użytego adresu URL w komunikatach o generowaniu kanału RSS.

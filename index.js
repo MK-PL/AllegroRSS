@@ -23,7 +23,7 @@ function* runElectron(url, checkSponspored) {
     yield nightmare
         .scrollTo(10000,0)
         .wait('.main-content')
-        .exists('.d7cfc2c')
+        .exists('.bb51f6c')
         .then(function(result) {
             if(result) {
                 nightmare.end('brak aukcji');
@@ -40,23 +40,23 @@ function* runElectron(url, checkSponspored) {
             .evaluate(function(checkSponspored) {
                 var arrayItems;
                 if(checkSponspored) {
-                    arrayItems = Array.from(document.querySelectorAll(".fa72b28"));
+                    arrayItems = Array.from(document.querySelectorAll("._8d855a8"));
                 } else {
-                    arrayItems = Array.from(document.querySelectorAll("._61aa5c3:not(._61c59e4) .fa72b28"));
+                    arrayItems = Array.from(document.querySelectorAll("._8aa57c6 ._2e710a1:last-child ._8d855a8"));
                 }
                
                 var tempLinks = [],
                       documentTitle = document.title;
                      
                 for(var i = 0; i < arrayItems.length; i++) {
-                   var arrayTitle                    = arrayItems[i].querySelector('._342830a') !== null ? arrayItems[i].querySelector('._342830a').textContent : '',
-                         arrayDescription        = arrayItems[i].querySelector('.bec3e46') !== null ? arrayItems[i].querySelector('.bec3e46').innerHTML : '',
-                         arrayLinks                  = arrayItems[i].querySelector('._342830a a') !== null ? arrayItems[i].querySelector('._342830a a').href : '',
-                         arrayPrice                  = arrayItems[i].querySelector('.e82f23a') !== null ? arrayItems[i].querySelector('.e82f23a').textContent : '',
-                         arrayTime                  = arrayItems[i].querySelector('.c589421') !== null ? arrayItems[i].querySelector('.c589421').textContent : '',
-                         arrayBuyNowAuction = arrayItems[i].querySelector('._1720519') !== null ? arrayItems[i].querySelector('._1720519').innerHTML : '',
-                         arrayInfo                     = arrayItems[i].querySelector('._7b041d2 ') !== null ? arrayItems[i].querySelector('._7b041d2 ').innerHTML : '',
-                         arrayPicture               = arrayItems[i].querySelector('.f5826c2 img') === null ? '' : typeof arrayItems[i].querySelector('.f5826c2 img').dataset.src != 'undefined' ? arrayItems[i].querySelector('.f5826c2 img').dataset.src : arrayItems[i].querySelector('.f5826c2 img').src;
+                   var arrayTitle                    = arrayItems[i].querySelector('._4462670') !== null ? arrayItems[i].querySelector('._4462670').textContent : '',
+                         arrayDescription        = arrayItems[i].querySelector('._745f8e9') !== null ? arrayItems[i].querySelector('._745f8e9').innerHTML : '',
+                         arrayLinks                  = arrayItems[i].querySelector('._4462670 a') !== null ? arrayItems[i].querySelector('._4462670 a').href : '',
+                         arrayPrice                  = arrayItems[i].querySelector('._8c38319') !== null ? arrayItems[i].querySelector('._8c38319').textContent : '',
+                         arrayTime                  = arrayItems[i].querySelector('._1fb3029') !== null ? arrayItems[i].querySelector('._1fb3029').textContent : '',
+                         arrayBuyNowAuction = arrayItems[i].querySelector('._75f799c') !== null ? arrayItems[i].querySelector('._75f799c').innerHTML : '',
+                         arrayInfo                     = arrayItems[i].querySelector('._87a9e6e ') !== null ? arrayItems[i].querySelector('._87a9e6e ').innerHTML : '',
+                         arrayPicture               = arrayItems[i].querySelector('._8f1726f img') === null ? '' : typeof arrayItems[i].querySelector('._8f1726f img').dataset.src != 'undefined' ? arrayItems[i].querySelector('._8f1726f img').dataset.src : arrayItems[i].querySelector('._8f1726f img').src;
                          
                    arrayDescription = arrayDescription.replace(/<dt>/g, '<span>');
                    arrayDescription = arrayDescription.replace(/<\/dt>/g, ':</span> ');
@@ -65,13 +65,13 @@ function* runElectron(url, checkSponspored) {
                    arrayPrice = arrayTime === '' ? arrayPrice : arrayPrice + ' - kwota licytacji';
                    arrayBuyNowAuction = arrayBuyNowAuction.replace('</span><span','</span> <span');
                    
-                   if (arrayItems[i].querySelector('._7b041d2') !== null) {
-                      if (arrayItems[i].querySelector('._7b041d2').innerHTML.search('z dostawą') != -1) {
-                          arrayInfo = arrayItems[i].querySelector('.e4865f5').textContent;
+                   if (arrayItems[i].querySelector('._87a9e6e') !== null) {
+                      if (arrayItems[i].querySelector('._87a9e6e').innerHTML.search('z dostawą') != -1) {
+                          arrayInfo = arrayItems[i].querySelector('._25d18aa').textContent;
                       } else {
                           arrayInfo = 'darmowa dostawa';
                       }
-                      if (arrayItems[i].querySelector('._7b041d2').innerHTML.search('zwrot') != -1) {
+                      if (arrayItems[i].querySelector('._87a9e6e').innerHTML.search('zwrot') != -1) {
                           arrayInfo += ', darmowy zwrot';
                       }
                    }
@@ -87,7 +87,7 @@ function* runElectron(url, checkSponspored) {
       if (nextExists) {
           yield nightmare
               .click('.opbox-pagination.bottom .next a')
-              .wait('.c33f1ee');
+              .wait('._8aa57c6');
       }
       
       currentPage++;

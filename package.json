@@ -1,6 +1,6 @@
 {
   "name": "AllegroRSS",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "AllegroRSS",
   "main": "index.js",
   "scripts": {
