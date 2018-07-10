@@ -72,6 +72,7 @@ Na wypadek, gdyby w skrypcie wystąpił błąd i chcemy, żeby wykonał się aut
 
 ## Zmiany
 
+- 0.2.0 Naprawienie usterek, które duplikowały oferty sponsorowane w kanale RSS oraz pokazywały wyłącznie oferty sponsorowane ze spodu listy wyników.
 - 0.1.9 Naprawienie usterki, która uniemożliwiała działanie skryptu.
 - 0.1.8 Przerobienie skryptu, żeby zwracał pusty kanał RSS, gdy nie ma aktywnych aukcji w podanym adresie URL, poprawki w kodzie.
 - 0.1.7 Przerobienie skryptu, żeby zwracał komunikat, gdy nie ma aktywnych aukcji w podanym adresie URL.

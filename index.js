@@ -19,7 +19,7 @@ function* runElectron(url, checkSponspored) {
         links = [];
 
     var pageTitle = yield nightmare.goto(url).title();
-  
+
     yield nightmare
         .scrollTo(10000,0)
         .wait('.main-content')
@@ -42,12 +42,12 @@ function* runElectron(url, checkSponspored) {
                 if(checkSponspored) {
                     arrayItems = Array.from(document.querySelectorAll("._8d855a8"));
                 } else {
-                    arrayItems = Array.from(document.querySelectorAll("._8aa57c6 ._2e710a1:last-child ._8d855a8"));
+                    arrayItems = Array.from(document.querySelectorAll("._8aa57c6 ._2e710a1:not(._17557b8) ._8d855a8"));
                 }
-               
+
                 var tempLinks = [],
                       documentTitle = document.title;
-                     
+
                 for(var i = 0; i < arrayItems.length; i++) {
                    var arrayTitle                    = arrayItems[i].querySelector('._4462670') !== null ? arrayItems[i].querySelector('._4462670').textContent : '',
                          arrayDescription        = arrayItems[i].querySelector('._745f8e9') !== null ? arrayItems[i].querySelector('._745f8e9').innerHTML : '',
@@ -57,7 +57,12 @@ function* runElectron(url, checkSponspored) {
                          arrayBuyNowAuction = arrayItems[i].querySelector('._75f799c') !== null ? arrayItems[i].querySelector('._75f799c').innerHTML : '',
                          arrayInfo                     = arrayItems[i].querySelector('._87a9e6e ') !== null ? arrayItems[i].querySelector('._87a9e6e ').innerHTML : '',
                          arrayPicture               = arrayItems[i].querySelector('._8f1726f img') === null ? '' : typeof arrayItems[i].querySelector('._8f1726f img').dataset.src != 'undefined' ? arrayItems[i].querySelector('._8f1726f img').dataset.src : arrayItems[i].querySelector('._8f1726f img').src;
-                         
+
+                   if(arrayLinks.includes('events/clicks?')){
+                       var sponsoredLink = new URL(arrayLinks).searchParams.get('redirect');
+                       arrayLinks = sponsoredLink.slice(0, sponsoredLink.indexOf(".html")+5);
+                   }
+
                    arrayDescription = arrayDescription.replace(/<dt>/g, '<span>');
                    arrayDescription = arrayDescription.replace(/<\/dt>/g, ':</span> ');
                    arrayDescription = arrayDescription.replace(/<dd>/g, '<strong>');
