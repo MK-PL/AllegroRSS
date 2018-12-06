@@ -42,7 +42,7 @@ function* runElectron(url, checkSponspored) {
                 if(checkSponspored) {
                     arrayItems = Array.from(document.querySelectorAll("._8d855a8"));
                 } else {
-                    arrayItems = Array.from(document.querySelectorAll("._8aa57c6 ._2e710a1:not(._17557b8) ._8d855a8"));
+                    arrayItems = Array.from(document.querySelectorAll("._8aa57c6 ._11bdc06:not(.e242706) ._8d855a8"));
                 }
 
                 var tempLinks = [],
