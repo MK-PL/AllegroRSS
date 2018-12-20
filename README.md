@@ -72,6 +72,7 @@ Na wypadek, gdyby w skrypcie wystąpił błąd i chcemy, żeby wykonał się aut
 
 ## Zmiany
 
+- 0.2.2 Naprawienie usterki, która uniemożliwiała działanie skryptu, poprawki w kodzie.
 - 0.2.1 Naprawienie usterki, która uniemożliwiała działanie skryptu.
 - 0.2.0 Naprawienie usterek, które duplikowały oferty sponsorowane w kanale RSS oraz pokazywały wyłącznie oferty sponsorowane ze spodu listy wyników.
 - 0.1.9 Naprawienie usterki, która uniemożliwiała działanie skryptu.
