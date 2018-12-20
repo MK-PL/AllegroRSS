@@ -17,7 +17,7 @@ AllegroRSS jest generatorem kanału RSS, który w porównaniu do standardowego g
 
 <b>Uwaga!</b>
 
-Aby skrypt zadziałał na systemie Linux, musi być na nim zainstalowane graficzne środowisko użytkownika (np. GNOME), ponieważ  jest wykorzystywany w skrypcie Electron (https://pl.wikipedia.org/wiki/Electron_(oprogramowanie) - przeglądarka oparta na Chromium). Skrypt w tym celu potrzebuje wyświetlić podaną stronę, wywołać do niej skrypty JS, żeby pobrały się dane o aukcjach, na których później może opracować kanał RSS.
+Aby skrypt zadziałał na systemie Linux, musi być na nim zainstalowane graficzne środowisko użytkownika (np. GNOME), ponieważ w skrypcie jest wykorzystywany Electron (https://pl.wikipedia.org/wiki/Electron_(oprogramowanie) - przeglądarka oparta na Chromium). Skrypt w tym celu potrzebuje wyświetlić podaną stronę, wywołać do niej skrypty JS, żeby pobrały się dane o aukcjach, na których później może opracować kanał RSS.
 
 W przypadku serwerów z Linuxem, w których komunikacja odbywa się domyślnie po SSH, można doinstalować środowisko graficzne oraz program do zdalnego sterowania (np. NoMachine).
 
