@@ -68,7 +68,7 @@ function* runElectron(url, checkSponspored) {
                          arrayTime                  = arrayItems[i].querySelector('.cc5390e') !== null ? arrayItems[i].querySelector('.cc5390e').textContent : '',
                          arrayBuyNowAuction = arrayItems[i].querySelector('.ab5e493') !== null ? arrayItems[i].querySelector('.ab5e493').innerHTML : '',
                          arrayInfo                     = arrayItems[i].querySelector('.ef149af') !== null ? arrayItems[i].querySelector('.ef149af').innerHTML : '',
-                         arrayPicture               = arrayItems[i].querySelector('._2bc857f img') === null ? '' : typeof arrayItems[i].querySelector('._2bc857f img').dataset.src != 'undefined' ? arrayItems[i].querySelector('._2bc857f img').dataset.src : arrayItems[i].querySelector('._2bc857f img').src;
+                         arrayPicture               = arrayItems[i].querySelector('.a607fda img') === null ? '' : typeof arrayItems[i].querySelector('.a607fda img').dataset.src != 'undefined' ? arrayItems[i].querySelector('.a607fda img').dataset.src : arrayItems[i].querySelector('.a607fda img').src;
 
                    if(arrayLinks.includes('events/clicks?')){
                        var sponsoredLink = new URL(arrayLinks).searchParams.get('redirect');
