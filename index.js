@@ -64,10 +64,10 @@ function* runElectron(url, checkSponspored) {
                    var arrayTitle                    = arrayItems[i].querySelector('.ebc9be2') !== null ? arrayItems[i].querySelector('.ebc9be2').textContent : '',
                          arrayDescription        = arrayItems[i].querySelector('._7e08ebc') !== null ? arrayItems[i].querySelector('._7e08ebc').innerHTML : '',
                          arrayLinks                  = arrayItems[i].querySelector('.ebc9be2 a') !== null ? arrayItems[i].querySelector('.ebc9be2 a').href : '',
-                         arrayPrice                  = arrayItems[i].querySelector('._611a83b') !== null ? arrayItems[i].querySelector('._611a83b').textContent : '',
+                         arrayPrice                  = arrayItems[i].querySelector('.fee8042') !== null ? arrayItems[i].querySelector('.fee8042').textContent : '',
                          arrayTime                  = arrayItems[i].querySelector('.cc5390e') !== null ? arrayItems[i].querySelector('.cc5390e').textContent : '',
                          arrayBuyNowAuction = arrayItems[i].querySelector('.ab5e493') !== null ? arrayItems[i].querySelector('.ab5e493').innerHTML : '',
-                         arrayInfo                     = arrayItems[i].querySelector('.ef149af') !== null ? arrayItems[i].querySelector('.ef149af').innerHTML : '',
+                         arrayInfo                     = arrayItems[i].querySelector('._2c95e96') !== null ? arrayItems[i].querySelector('._2c95e96').innerHTML : '',
                          arrayPicture               = arrayItems[i].querySelector('.a607fda img') === null ? '' : typeof arrayItems[i].querySelector('.a607fda img').dataset.src != 'undefined' ? arrayItems[i].querySelector('.a607fda img').dataset.src : arrayItems[i].querySelector('.a607fda img').src;
 
                    if(arrayLinks.includes('events/clicks?')){
@@ -82,13 +82,13 @@ function* runElectron(url, checkSponspored) {
                    arrayPrice = arrayTime === '' ? arrayPrice : arrayPrice + ' - kwota licytacji';
                    arrayBuyNowAuction = arrayBuyNowAuction.replace('</span><span','</span> <span');
                    
-                   if (arrayItems[i].querySelector('.ef149af') !== null) {
-                      if (arrayItems[i].querySelector('.ef149af').innerHTML.search('z dostawą') != -1) {
-                          arrayInfo = arrayItems[i].querySelector('.ef149af').textContent;
+                   if (arrayItems[i].querySelector('._2c95e96') !== null) {
+                      if (arrayItems[i].querySelector('._2c95e96').innerHTML.search('z dostawą') != -1) {
+                          arrayInfo = arrayItems[i].querySelector('._2c95e96').textContent;
                       } else {
                           arrayInfo = 'darmowa dostawa';
                       }
-                      if (arrayItems[i].querySelector('.ef149af').innerHTML.search('zwrot') != -1) {
+                      if (arrayItems[i].querySelector('._2c95e96').innerHTML.search('zwrot') != -1) {
                           arrayInfo += ', darmowy zwrot';
                       }
                    }
