@@ -62,7 +62,6 @@ function* runElectron(url, checkSponspored) {
 
                 for(var i = 0; i < arrayItems.length; i++) {
                    var arrayTitle                    = arrayItems[i].querySelector('.ebc9be2') !== null ? arrayItems[i].querySelector('.ebc9be2').textContent : '',
-                         arraySeller                  = window['__listing_StoreState_base'].items.itemsGroups[0].items[i].seller.login !== null ? window['__listing_StoreState_base'].items.itemsGroups[0].items[i].seller.login : '',
                          arrayDescription        = arrayItems[i].querySelector('._7e08ebc') !== null ? arrayItems[i].querySelector('._7e08ebc').innerHTML : '',
                          arrayLinks                  = arrayItems[i].querySelector('.ebc9be2 a') !== null ? arrayItems[i].querySelector('.ebc9be2 a').href : '',
                          arrayPrice                  = arrayItems[i].querySelector('.fee8042') !== null ? arrayItems[i].querySelector('.fee8042').textContent : '',
@@ -94,7 +93,7 @@ function* runElectron(url, checkSponspored) {
                       }
                    }
                    
-                   tempLinks.push({'item': arrayItems[i].innerHTML, 'title': arrayTitle, 'seller': arraySeller, 'description': arrayDescription, 'link': arrayLinks, 'price': arrayPrice, 'time': arrayTime, 'buyNowAuction': arrayBuyNowAuction, 'info': arrayInfo, 'picture': arrayPicture, 'documentTitle': documentTitle});
+                   tempLinks.push({'item': arrayItems[i].innerHTML, 'title': arrayTitle, 'description': arrayDescription, 'link': arrayLinks, 'price': arrayPrice, 'time': arrayTime, 'buyNowAuction': arrayBuyNowAuction, 'info': arrayInfo, 'picture': arrayPicture, 'documentTitle': documentTitle});
                 }
                 
                 return tempLinks;
@@ -169,7 +168,7 @@ http.createServer(function (req, res) {
                             for(var i = 0; i < result.length; i++) {
                                 feed.addItem({
                                     title: result[i].title,
-                                    description: result[i].description + '<p>Od: <a href="https://allegro.pl/uzytkownik/' + result[i].seller + '">' + result[i].seller + '<a/></p><div><strong>' + result[i].price + '</strong></div>' + '<div>' + result[i].time + '</div>' + '<div>' + result[i].buyNowAuction + '</div>' + '<dl>' + result[i].info + '</dl><div><img src="'+ result[i].picture +'"></div><hr>' ,
+                                    description: result[i].description + '<div><strong>' + result[i].price + '</strong></div>' + '<div>' + result[i].time + '</div>' + '<div>' + result[i].buyNowAuction + '</div>' + '<dl>' + result[i].info + '</dl><div><img src="'+ result[i].picture +'"></div><hr>' ,
                                     link: result[i].link
                                 });
                             }
