@@ -72,7 +72,7 @@ function* runElectron(url, checkSponspored) {
 
                    if(arrayLinks.includes('events/clicks?')){
                        var sponsoredLink = new URL(arrayLinks).searchParams.get('redirect');
-                       arrayLinks = sponsoredLink.slice(0, sponsoredLink.indexOf(".html")+5);
+                       arrayLinks = sponsoredLink.slice(0, sponsoredLink.indexOf('?'));
                    }
 
                    arrayDescription = arrayDescription.replace(/<dt>/g, '<span>');

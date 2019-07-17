@@ -72,6 +72,7 @@ Na wypadek, gdyby w skrypcie wystąpił błąd i chcemy, żeby wykonał się aut
 
 ## Zmiany
 
+- 0.2.6 Naprawienie linków sponsorowanych.
 - 0.2.4 Przywrócenie wyświetlania cen w kanale RSS.
 - 0.2.3 Naprawienie miniaturek w kanale RSS.
 - 0.2.2 Naprawienie usterki, która uniemożliwiała działanie skryptu, poprawki w kodzie.
