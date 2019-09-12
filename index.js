@@ -52,9 +52,9 @@ function* runElectron(url, checkSponspored) {
             .evaluate(checkSponspored => {
                 var arrayItems;
                 if(checkSponspored) {
-                    arrayItems = Array.from(document.querySelectorAll("._8d855a8"));
+                    arrayItems = Array.from(document.querySelectorAll("._5a7713f > article"));
                 } else {
-                    arrayItems = Array.from(document.querySelectorAll("._8d855a8:not([data-analytics-view-label])"));
+                    arrayItems = Array.from(document.querySelectorAll("._5a7713f > article:not([data-analytics-view-label='showSponsoredItems'])"));
                 }
 
                 var tempLinks = [],
