@@ -6,6 +6,7 @@ var vo = require('vo');
 const Feed = require('feed');
 
 const port = process.env.PORT || 4000;
+const listenhost = process.env.LISTENHOST || "localhost";
 
 function* runElectron(url, checkSponspored) {
     var nightmare = Nightmare({
@@ -229,6 +230,6 @@ http.createServer(function (req, res) {
             });
             break;
     }
-}).listen(port, 'localhost', () => {
+}).listen(port, listenhost, () => {
     console.log(`Uruchomiono serwer na porcie ${port}`);
 });
