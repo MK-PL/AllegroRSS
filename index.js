@@ -33,7 +33,7 @@ function* runElectron(url, checkSponspored) {
     var pageTitle = yield nightmare.goto(url).title();
 
     yield nightmare
-        .click('button[data-analytics-interaction-value="accept"]')
+        .click('button[data-role="accept-consent"]')
         .scrollTo(10000,0)
         .wait('.main-wrapper')
         .exists('.d7f32e9')
