@@ -53,9 +53,9 @@ function* runElectron(url, checkSponspored) {
             .evaluate(checkSponspored => {
                 var arrayItems;
                 if(checkSponspored) {
-                    arrayItems = Array.from(document.querySelectorAll("._5a7713f > article"));
+                    arrayItems = Array.from(document.querySelectorAll("._9c44d_3UJEh article"));
                 } else {
-                    arrayItems = Array.from(document.querySelectorAll("._5a7713f > article:not([data-analytics-view-label='showSponsoredItems'])"));
+                    arrayItems = Array.from(document.querySelectorAll("._9c44d_3UJEh article:not([data-analytics-view-label='showSponsoredItems'])"));
                 }
 
                 var tempLinks = [],
