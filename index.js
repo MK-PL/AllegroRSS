@@ -36,7 +36,7 @@ function* runElectron(url, checkSponspored) {
         .click('button[data-role="accept-consent"]')
         .scrollTo(10000,0)
         .wait('.main-wrapper')
-        .exists('.d7f32e9')
+        .exists('._9c44d_1ojYv')
         .then(function(result) {
             if(result) {
                 nightmare.end('brak aukcji');
