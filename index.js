@@ -62,14 +62,14 @@ function* runElectron(url, checkSponspored) {
                       documentTitle = document.title;
 
                 for(var i = 0; i < arrayItems.length; i++) {
-                   var arrayTitle                    = arrayItems[i].querySelector('.ebc9be2') !== null ? arrayItems[i].querySelector('.ebc9be2').textContent : '',
-                         arrayDescription        = arrayItems[i].querySelector('._7e08ebc') !== null ? arrayItems[i].querySelector('._7e08ebc').innerHTML : '',
-                         arrayLinks                  = arrayItems[i].querySelector('.ebc9be2 a') !== null ? arrayItems[i].querySelector('.ebc9be2 a').href : '',
-                         arrayPrice                  = arrayItems[i].querySelector('.fee8042') !== null ? arrayItems[i].querySelector('.fee8042').textContent : '',
-                         arrayTime                  = arrayItems[i].querySelector('.cc5390e') !== null ? arrayItems[i].querySelector('.cc5390e').textContent : '',
-                         arrayBuyNowAuction = arrayItems[i].querySelector('.ab5e493') !== null ? arrayItems[i].querySelector('.ab5e493').innerHTML : '',
-                         arrayInfo                     = arrayItems[i].querySelector('._2c95e96') !== null ? arrayItems[i].querySelector('._2c95e96').innerHTML : '',
-                         arrayPicture               = arrayItems[i].querySelector('.a607fda img') === null ? '' : typeof arrayItems[i].querySelector('.a607fda img').dataset.src != 'undefined' ? arrayItems[i].querySelector('.a607fda img').dataset.src : arrayItems[i].querySelector('.a607fda img').src;
+                   var arrayTitle                    = arrayItems[i].querySelector('._9c44d_LUA1k') !== null ? arrayItems[i].querySelector('._9c44d_LUA1k').textContent : '',
+                         arrayDescription        = arrayItems[i].querySelector('._9c44d_Pjt1U') !== null ? arrayItems[i].querySelector('._9c44d_Pjt1U').innerHTML : '',
+                         arrayLinks                  = arrayItems[i].querySelector('._9c44d_LUA1k a') !== null ? arrayItems[i].querySelector('._9c44d_LUA1k a').href : '',
+                         arrayPrice                  = arrayItems[i].querySelector('._9c44d_2K6FN') !== null ? arrayItems[i].querySelector('._9c44d_2K6FN').textContent : '',
+                         arrayTime                  = arrayItems[i].querySelector('._9c44d_3WTDC') !== null ? arrayItems[i].querySelector('._9c44d_3WTDC').textContent : '',
+                         arrayBuyNowAuction = arrayItems[i].querySelector('._9c44d_3QaiE') !== null ? arrayItems[i].querySelector('._9c44d_3QaiE').innerHTML : '',
+                         arrayInfo                     = arrayItems[i].querySelector('._9c44d_3kZXX') !== null ? arrayItems[i].querySelector('._9c44d_3kZXX').innerHTML : '',
+                         arrayPicture               = arrayItems[i].querySelector('._9c44d_1MOYf img') === null ? '' : typeof arrayItems[i].querySelector('._9c44d_1MOYf img').dataset.src != 'undefined' ? arrayItems[i].querySelector('._9c44d_1MOYf img').dataset.src : arrayItems[i].querySelector('._9c44d_1MOYf img').src;
 
                    if(arrayLinks.includes('events/clicks?')){
                        var sponsoredLink = new URL(arrayLinks).searchParams.get('redirect');
@@ -83,16 +83,22 @@ function* runElectron(url, checkSponspored) {
                    arrayPrice = arrayTime === '' ? arrayPrice : arrayPrice + ' - kwota licytacji';
                    arrayBuyNowAuction = arrayBuyNowAuction.replace('</span><span','</span> <span');
                    
-                   if (arrayItems[i].querySelector('._2c95e96') !== null) {
-                      if (arrayItems[i].querySelector('._2c95e96').innerHTML.search('z dostawą') != -1) {
-                          arrayInfo = arrayItems[i].querySelector('._2c95e96').textContent;
+                   if (arrayItems[i].querySelector('._9c44d_2bELB') !== null) {
+                      if (arrayItems[i].querySelector('._9c44d_2bELB').innerHTML.search('z kurierem') != -1) {
+                          arrayInfo += ', Smart z kurierem';
                       } else {
-                          arrayInfo = 'darmowa dostawa';
-                      }
-                      if (arrayItems[i].querySelector('._2c95e96').innerHTML.search('zwrot') != -1) {
-                          arrayInfo += ', darmowy zwrot';
+                          arrayInfo += ', Smart';
                       }
                    }
+                   if (arrayItems[i].querySelector('._9c44d_1xKGX') !== null) {
+                      arrayInfo += ', darmowa dostawa';
+                   }
+                   if (arrayItems[i].querySelector('._9c44d_YOP71') !== null) {
+                      if(arrayItems[i].querySelector('._9c44d_YOP71') !== '') {
+                          arrayInfo += ', ' + arrayItems[i].querySelector('._9c44d_YOP71').textContent;
+                      }
+                   }
+                   
                    
                    tempLinks.push({'item': arrayItems[i].innerHTML, 'title': arrayTitle, 'description': arrayDescription, 'link': arrayLinks, 'price': arrayPrice, 'time': arrayTime, 'buyNowAuction': arrayBuyNowAuction, 'info': arrayInfo, 'picture': arrayPicture, 'documentTitle': documentTitle});
                 }
