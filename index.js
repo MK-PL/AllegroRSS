@@ -53,9 +53,9 @@ function* runElectron(url, checkSponspored) {
             .evaluate(checkSponspored => {
                 var arrayItems;
                 if(checkSponspored) {
-                    arrayItems = Array.from(document.querySelectorAll("._9c44d_3UJEh article"));
+                    arrayItems = Array.from(document.querySelectorAll("._9c44d_3pyzl article"));
                 } else {
-                    arrayItems = Array.from(document.querySelectorAll("._9c44d_3UJEh article:not([data-analytics-view-label='showSponsoredItems'])"));
+                    arrayItems = Array.from(document.querySelectorAll("._9c44d_3pyzl article:not([data-analytics-view-label='showSponsoredItems'])"));
                 }
 
                 var tempLinks = [],
@@ -68,8 +68,8 @@ function* runElectron(url, checkSponspored) {
                          arrayPrice                  = arrayItems[i].querySelector('._9c44d_2K6FN') !== null ? arrayItems[i].querySelector('._9c44d_2K6FN').textContent : '',
                          arrayTime                  = arrayItems[i].querySelector('._9c44d_3WTDC') !== null ? arrayItems[i].querySelector('._9c44d_3WTDC').textContent : '',
                          arrayBuyNowAuction = arrayItems[i].querySelector('._9c44d_3QaiE') !== null ? arrayItems[i].querySelector('._9c44d_3QaiE').innerHTML : '',
-                         arrayInfo                     = arrayItems[i].querySelector('._9c44d_3kZXX') !== null ? arrayItems[i].querySelector('._9c44d_3kZXX').innerHTML : '',
-                         arrayPicture               = arrayItems[i].querySelector('._9c44d_1MOYf img') === null ? '' : typeof arrayItems[i].querySelector('._9c44d_1MOYf img').dataset.src != 'undefined' ? arrayItems[i].querySelector('._9c44d_1MOYf img').dataset.src : arrayItems[i].querySelector('._9c44d_1MOYf img').src;
+                         arrayInfo                     = arrayItems[i].querySelector('._9c44d_1xKGX') !== null ? arrayItems[i].querySelector('._9c44d_1xKGX').innerText : '',
+                         arrayPicture               = arrayItems[i].querySelector('._9c44d_1ILhl img') === null ? '' : typeof arrayItems[i].querySelector('._9c44d_1ILhl img').dataset.src != 'undefined' ? arrayItems[i].querySelector('._9c44d_1ILhl img').dataset.src : arrayItems[i].querySelector('._9c44d_1ILhl img').src;
 
                    if(arrayLinks.includes('events/clicks?')){
                        var sponsoredLink = new URL(arrayLinks).searchParams.get('redirect');

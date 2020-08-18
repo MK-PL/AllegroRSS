@@ -72,6 +72,7 @@ Na wypadek, gdyby w skrypcie wystąpił błąd i chcemy, żeby wykonał się aut
 
 ## Zmiany
 
+- 0.3.1 Naprawienie usterki, która uniemożliwiała działanie skryptu.
 - 0.3.0 Naprawienie usterki, która uniemożliwiała działanie skryptu.
 - 0.2.6 Naprawienie linków sponsorowanych.
 - 0.2.4 Przywrócenie wyświetlania cen w kanale RSS.
