@@ -68,10 +68,12 @@ Na wypadek, gdyby w skrypcie wystąpił błąd i chcemy, żeby wykonał się aut
 ## Co zostało użyte do zrobienia AllegroRSS?
 
 - HTML/CSS/JS/NODE.JS
-- MODUŁY NODE.JS: HTTP, FS, URL, NIGHTMARE, VO, FEED
+- MODUŁY NODE.JS: HTTP, FS, URL, PUPPETEER, FEED
 
 ## Zmiany
 
+- 1.0.0 Refaktoryzacja skryptu, zmiana biblioteki z Nightmare na Puppeteer.
+- 0.3.2 Naprawienie usterki, która uniemożliwiała działanie skryptu.
 - 0.3.1 Naprawienie usterki, która uniemożliwiała działanie skryptu.
 - 0.3.0 Naprawienie usterki, która uniemożliwiała działanie skryptu.
 - 0.2.6 Naprawienie linków sponsorowanych.

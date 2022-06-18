@@ -1,6 +1,6 @@
 {
   "name": "AllegroRSS",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "AllegroRSS",
   "main": "index.js",
   "scripts": {
@@ -14,11 +14,10 @@
   "author": "MK-PL",
   "license": "MIT",
   "dependencies": {
+    "feed": "^4.2.2",
     "fs": "latest",
     "http": "latest",
-    "url": "^0.11.0",
-    "nightmare": "^3.0.1",
-    "vo": "^4.0.2",
-    "feed": "^1.1.1"
+    "puppeteer": "^14.3.0",
+    "url": "^0.11.0"
   }
 }
